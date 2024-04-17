@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plant Health Monitoring System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 90%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      form {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .file-upload-btn {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .file-upload-btn:hover {
+        background-color: #45a049;
+      }
+
+      button[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      .result-message {
+        text-align: center;
+        font-size: 18px;
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+      }
+
+      .result-message.healthy {
+        color: green;
+      }
+
+      .result-message.unhealthy {
+        color: red;
+      }
+
+      .plant-image {
+        display: block;
+        width: 400px;
+        max-width: 100%;
+        height: auto;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Plant Health Monitoring System</h1>
+      <img
+        class="plant-image"
+        src="{{ url_for('static', filename='images/5101920.jpg') }}"
+        alt="Plant Image"
+      />
+      <form action="/predict" method="post" enctype="multipart/form-data">
+        <label for="file-upload" class="file-upload-btn">Choose Image</label>
+        <input id="file-upload" type="file" name="image" />
+        <button type="submit">Check Health</button>
+      </form>
+      {% if result %}
+      <p
+        class="result-message {% if result == 'Healthy' %}healthy{% else %}unhealthy{% endif %}"
+      >
+        The plant is {{ result }}
+      </p>
+      {% endif %}
+    </div>
+  </body>
+</html>
