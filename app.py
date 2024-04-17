@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 
 app = Flask(__name__)
-model = load_model('C:/Users/user/Documents/plant/model.h5')
+model = load_model('model.h5')
 
 def preprocess_image(image):
     img = image.resize((64, 64))
